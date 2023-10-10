@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "rubens-geometry-lib": "^1.0.5",
+    "rubens-geometry-lib": "^1.1.1",
     "vue": "^3.3.4"
   },
   "devDependencies": {

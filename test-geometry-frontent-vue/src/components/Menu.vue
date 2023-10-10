@@ -87,7 +87,7 @@
     <div class="" v-if="selectedOptionsFigures === 'TRIANGLE'">
       <h2>TRIANGLE</h2>
       <div class="inputs">
-        <input type="number" v-model="l1" name="" id="">
+        <input type="number" v-model="l1" name="" id="" placeholder="l1">
         <input type="number" v-model="l2" name="" id="">
         <input type="number" v-model="l3" name="" id="">
         <button v-on:click="handleCrationTriangle">GUARDAR FIGURA</button>
@@ -98,13 +98,34 @@
 
     <div class="" v-if="selectedOptionsFigures === 'RECTANGLE'">
       <h2>RECTANGLE</h2>
+      <div class="inputs">
+        <input type="number" v-model="base" name="" id="">
+        <input type="number" v-model="height" name="" id="">
+        <button v-on:click="handleCrationRectangle">GUARDAR FIGURA</button>
+        <button @click="returnBackdefaultValuesMenu()">BACK MENU</button>
+      </div>
     </div>
     </div>
+  </div>
+
+  <div class="options-menu" v-if="state === 'BIGGEST'">
+      <h2>BIGGEST FIGURE IS: </h2>
+      <div class="card" v-if="biggesFigureArea">
+                <h4>ID: {{ biggesFigureArea.id }}</h4>
+                <h3>FIGURE: {{ biggesFigureArea.title }}</h3>
+                <h4>PERIMETER: {{ biggesFigureArea.perimeter }}</h4>
+                <h4>AREA{{ biggesFigureArea.area }}</h4>
+      </div>
+      <div class="card" v-if="!biggesFigureArea">
+                <h2>NO HAY NINGUNA FIGURA AUN</h2>
+      </div>
+
+      <button @click="returnBackdefaultValuesMenu()">BACK MENU</button>
   </div>
 </template>
 
 <script>
-  import {Circle, Triangle, Rectangle}  from 'rubens-geometry-lib'
+  import {Circle, Triangle, Rectangle, findMaxArea}  from 'rubens-geometry-lib'
 
 export default {
   
@@ -115,20 +136,30 @@ export default {
       optionsFigures: ["CIRCLE","TRIANGLE", "RECTANGLE"],
       selectedOption: "MENU",
       selectedOptionsFigures : "",
-      stateActions:["MENU","GETDATA"],
+      stateActions:["MENU","GETDATA","BIGGEST"],
       state:"MENU",
       ratio:0,
       l1:0,
       l2:0,
       l3:0,
       base:0,
-      height:0
+      height:0,
+      biggesFigureArea:{}
     }
   },
   methods: {
     selectOption(option) {
       console.log(option)
       this.selectedOption = option;
+      if(option === "GETAREA"){
+        if(this.listFigures){
+          this.biggesFigureArea = findMaxArea(this.listFigures);
+        }else{
+        }
+
+        this.state = 'BIGGEST';
+        
+      }
     },
     selecteOptionsFigures(option) {
       console.log(option)
@@ -153,7 +184,7 @@ export default {
       this.l3=0;
       this.returnBackdefaultValuesMenu();
     },
-    handleCrationTriangle() {
+    handleCrationRectangle() {
       const newRectangle = new  Rectangle(this.base,this.height);
       console.log(newRectangle);
       this.listFigures.push(newRectangle.getData());

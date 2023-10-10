@@ -1,73 +1,41 @@
-
-const {makeRandomId} = require('./utils')
+// Importing makeRandomId function from ./utils file
+const {makeRandomId} = require('./utils');
 
 class BaseFigure {
     constructor() {
+        // Assign a random ID using the makeRandomId function
         this.id = makeRandomId();
-        this.title ="figure";
+
+        // Assign default values to the properties of the base figure
+        this.title = "figure";
         this.area = 0;
         this.perimeter = 0;
         this.sides = [];
+
     }
 
-    
     getArea() {
-      return this.area;
+        // Calculate the area of the figure based on its properties
+        return this.area;
     }
-    
+
     getPerimeter() {
-      return this.perimeter;
+        // Calculate the perimeter of the figure based on its properties
+        return this.perimeter;
     }
-    
+
     getSides() {
-      return this.sides
+        // Return an array of sides of the figure
+        return this.sides;
     }
 
     getTitle() {
+        // Return the title of the figure
         return this.title;
     }
 }
 
+module.exports = {
+    BaseFigure,
+};
 
-module.exports ={
-    BaseFigure
-}
-
-/*
-arregleme los errores y comentemelo en ingles: 
-
-class BaseFigure {
-    constructor() {
-        
-        const makeRandomId = () => {
-            let result = ''
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-            for (let i = 0; i < 10; i++ ) {
-              result += characters.charAt(Math.floor(Math.random() * characters.length));
-           }
-           return result;
-        }
-
-        this.id = makeRandomId();
-        this.area = 0;
-        this.perimeter = 0;
-        this.sides = [];
-    }
-
-    
-    getArea() {
-      return this.area;
-    }
-    
-    getPerimeter() {
-      return this.perimeter;
-    }
-    
-    getLados() {
-      return this.sides
-    }
-}
-
-
-
-*/
